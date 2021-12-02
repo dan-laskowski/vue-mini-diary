@@ -1,4 +1,4 @@
-# vue-mini-diary
+# Mini Diary App
 
 ## Project setup
 ```
