@@ -3,16 +3,17 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      color: {
-        'rich-black': '#000814',
-        'oxford-blue': '#001D3D',
-        'prussian-blue': '#003566',
-        'mikado-yellow': '#ffc300',
-        'gold-web-golden': '#ffd60a',
+      colors: {
+        redish: '#F16766',
+        bluish: '#29A3E0',
+        orangish: '#F19D0B',
+        greyish: '#2E4B62',
+        whitish: '#FAEFE0',
       },
     },
     fontFamily: {
       Taviraj: ['Taviraj, serif'],
+      sans: ['Helvetica', 'Arial', 'sans-serif'],
     },
     container: {
       center: true,
