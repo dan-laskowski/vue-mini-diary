@@ -61,11 +61,12 @@
         </div>
 
         <div>
-          <div class="text-sm">
-            <a href="#" class="font-medium text-bluish hover:text-blue-500">
-              Forgot your password?
-            </a>
-          </div>
+          <router-link class="text-sm mt-6 text-center" :to="{ name: 'Login' }">
+            Already have an account?
+            <span class="font-medium text-bluish hover:text-blue-500"
+              >Login</span
+            >
+          </router-link>
         </div>
 
         <div>
