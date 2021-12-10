@@ -86,10 +86,36 @@
         class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-          <LockClosedIcon
-            class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-            aria-hidden="true"
-          />
+          <svg
+            v-if="!linkForm"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+            />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          </svg>
         </span>
         {{ linkForm ? 'Login with a password' : 'Login with a magic link' }}
       </button>
@@ -101,7 +127,6 @@
 import { ref } from 'vue';
 import { supabase } from '../supabase/index';
 import { useRouter } from 'vue-router';
-import { LockClosedIcon } from '@heroicons/vue/solid';
 export default {
   name: 'Login',
   setup() {
@@ -150,7 +175,6 @@ export default {
       loginUser,
       linkForm,
       switchForms,
-      LockClosedIcon,
     };
   },
 };
