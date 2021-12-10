@@ -1,14 +1,17 @@
 <template>
   <div v-if="appReady" class="min-h-full font-Taviraj box-border">
+    <Navigation />
     <router-view />
   </div>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation.vue';
 import { ref } from 'vue';
 import { supabase } from './supabase/index';
 import store from './store/index';
 export default {
+  components: { Navigation },
   setup() {
     const appReady = ref(null);
 

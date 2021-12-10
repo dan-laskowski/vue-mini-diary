@@ -20,12 +20,25 @@
           <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Your name"
+              v-model="name"
+            />
+          </div>
+          <div>
+            <label for="email-address" class="sr-only">Email address</label>
+            <input
               id="email-address"
               name="email"
               type="email"
               autocomplete="email"
               required=""
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
               v-model="email"
             />
@@ -99,6 +112,7 @@ export default {
   setup() {
     const router = useRouter();
     const formValues = {
+      name: ref(null),
       email: ref(null),
       password: ref(null),
       confirmPassword: ref(null),
@@ -106,17 +120,24 @@ export default {
     const errorMessage = ref(null);
 
     //Extracting multiple properties by object deconstruction
-    const { email, password, confirmPassword } = formValues;
+    const { name, email, password, confirmPassword } = formValues;
 
     //Register user to app function
     const registerUser = async () => {
       if (password.value === confirmPassword.value) {
         try {
           //Register user in project's database
-          const { error } = await supabase.auth.signUp({
-            email: email.value,
-            password: password.value,
-          });
+          const { error } = await supabase.auth.signUp(
+            {
+              email: email.value,
+              password: password.value,
+            },
+            {
+              data: {
+                name: name.value,
+              },
+            }
+          );
 
           if (error) throw error;
 
@@ -141,6 +162,7 @@ export default {
       }, 5000);
     };
     return {
+      name,
       email,
       password,
       confirmPassword,
