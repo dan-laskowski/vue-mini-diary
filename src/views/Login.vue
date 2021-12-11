@@ -49,6 +49,16 @@
           </div>
         </div>
         <div>
+          <router-link
+            v-if="!linkForm"
+            class="text-sm underline mt-4 text-center"
+            :to="{ name: 'Register' }"
+          >
+            Forgot password?
+          </router-link>
+        </div>
+
+        <div>
           <button
             type="submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-bluish hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
