@@ -10,70 +10,110 @@
           alt="Notepad"
         />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-greyish">
-          Edit profile
+          Edit your profile
         </h2>
       </div>
-      <p v-if="{ statusMessage }" class="text-green-600">{{ statusMessage }}</p>
-      <p v-if="{ errorMessage }" class="text-red-500">{{ errorMessage }}</p>
-
-      <form class="mt-8 space-y-6" @submit.prevent="loginUser">
+      <form class="mt-8 space-y-6" @submit.prevent="updateProfile">
+        <p v-if="{ errorMessage }" class="text-red-500">{{ errorMessage }}</p>
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
-          <div>
-            <label for="name" class="sr-only">Name</label>
+          <div class="relative mb-4">
+            <label for="name-with-label" class="text-gray-700 text-sm">
+              Name
+            </label>
             <input
-              id="name"
-              name="name"
               type="text"
-              autocomplete="name"
-              required=""
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Name"
+              id="name-with-label"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              name="email"
+              placeholder=""
               v-model="username"
             />
           </div>
-          <div>
-            <label for="email-address" class="sr-only">Email address</label>
+          <div class="relative mb-4">
+            <label for="email-with-label" class="text-gray-700 text-sm">
+              Email
+            </label>
             <input
-              id="email-address"
-              name="email"
               type="email"
-              autocomplete="email"
-              required=""
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Email address"
+              id="email-with-label"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              name="email"
+              placeholder=""
               v-model="email"
             />
           </div>
-          <div>
-            <label for="password" class="sr-only">Password</label>
-            <input
-              v-if="!linkForm"
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              required="linkForm"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Password"
-              v-model="password"
-            />
-          </div>
-        </div>
-        <div>
-          <button
-            type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-bluish hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon
-                class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                aria-hidden="true"
+          <form @submit.prevent="changePassword">
+            <h3
+              class="pt-12 pb-6 text-center text-xl font-extrabold text-greyish"
+            >
+              Change password
+            </h3>
+            <div class="relative pb-4">
+              <label
+                for="currentPassword-with-label"
+                class="text-sm text-gray-700"
+              >
+                Current password
+              </label>
+              <input
+                type="password"
+                id="currentPassword-with-label"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                name="currentPassword"
+                placeholder=""
+                v-model="currentPassword"
               />
-            </span>
-            {{ linkForm ? `Send me a magic link` : `Sign up` }}
-          </button>
+            </div>
+            <div class="relative pb-4">
+              <label for="newPassword-with-label" class="text-gray-700 text-sm">
+                New password
+              </label>
+              <input
+                type="password"
+                id="newPassword-with-label"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                name="newPassword"
+                placeholder=""
+                v-model="newPassword"
+              />
+            </div>
+            <div class="relative pb-4">
+              <label
+                for="confirmPassword-with-label"
+                class="text-gray-700 text-sm"
+              >
+                Confirm new password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword-with-label"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                name="confirmPassword"
+                placeholder=""
+                v-model="confirmPassword"
+              />
+            </div>
+            <router-link
+              class="text-sm underline mt-6 text-center"
+              :to="{ name: 'Register' }"
+            >
+              Forgot password?
+            </router-link>
+            <button
+              type="submit"
+              class="mt-4 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-bluish hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Change password
+            </button>
+          </form>
         </div>
+        <button
+          type="submit"
+          class="mt-4 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Update profile info
+        </button>
       </form>
     </div>
   </div>
@@ -85,11 +125,30 @@ import store from '../store/index';
 import { ref } from 'vue';
 export default {
   setup() {
-    store.user = supabase.auth.user();
     const username = ref(null);
-    username.value = store.user.user_metadata.name;
+    const email = ref(null);
+    const errorMessage = ref(null);
+    const newPassword = ref(null);
+    const confirmPassword = ref(null);
 
-    return { username };
+    store.user = supabase.auth.user();
+    username.value = store.user.user_metadata.name;
+    email.value = store.user.email;
+    console.log(store.user);
+
+    const changePassword = async () => {};
+
+    const updateProfile = async () => {};
+
+    return {
+      username,
+      email,
+      errorMessage,
+      newPassword,
+      confirmPassword,
+      changePassword,
+      updateProfile,
+    };
   },
 };
 </script>
