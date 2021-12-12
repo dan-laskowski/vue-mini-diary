@@ -52,7 +52,7 @@
           <router-link
             v-if="!linkForm"
             class="text-sm underline mt-4 text-center"
-            :to="{ name: 'Register' }"
+            :to="{ name: 'PasswordReset' }"
           >
             Forgot password?
           </router-link>

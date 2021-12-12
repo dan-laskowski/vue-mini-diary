@@ -3,6 +3,7 @@ import { supabase } from '../supabase/index';
 import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
+import PasswordReset from '../views/PasswordReset.vue';
 import Diary from '../views/Diary.vue';
 import Profile from '../views/Profile.vue';
 
@@ -27,6 +28,14 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      auth: false,
+    },
+  },
+  {
+    path: '/password/reset',
+    name: 'PasswordReset',
+    component: PasswordReset,
     meta: {
       auth: false,
     },

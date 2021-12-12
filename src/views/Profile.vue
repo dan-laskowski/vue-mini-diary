@@ -109,6 +109,7 @@ export default {
     const newPassword = ref(null);
     const confirmPassword = ref(null);
 
+    //Get user info and pass them to the input fields
     store.user = supabase.auth.user();
     username.value = store.user.user_metadata.name;
     email.value = store.user.email;
@@ -142,7 +143,43 @@ export default {
       }
     };
 
-    const updateProfile = async () => {};
+    const updateProfile = async () => {
+      if (username.value !== store.user.user_metadata.name) {
+        try {
+          const { error } = await supabase.auth.update({
+            data: {
+              name: username.value,
+            },
+          });
+          if (error) throw error;
+          statusMessage.value = `Your name has been changed successfully.`;
+          setTimeout(() => {
+            statusMessage.value = null;
+          }, 5000);
+        } catch (error) {
+          errorMessage.value = error.message;
+          setTimeout(() => {
+            errorMessage.value = null;
+          }, 5000);
+        }
+      } else if (email.value !== store.user.email) {
+        try {
+          const { error } = await supabase.auth.update({
+            email: email.value,
+          });
+          if (error) throw error;
+          statusMessage.value = `Your email has been changed successfully. Confirm your new email address.`;
+          setTimeout(() => {
+            statusMessage.value = null;
+          }, 5000);
+        } catch (error) {
+          errorMessage.value = error.message;
+          setTimeout(() => {
+            errorMessage.value = null;
+          }, 5000);
+        }
+      }
+    };
 
     return {
       username,
