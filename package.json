@@ -13,6 +13,8 @@
     "@popperjs/core": "^2.11.0",
     "@supabase/supabase-js": "^1.28.5",
     "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@tiptap/starter-kit": "^2.0.0-beta.157",
+    "@tiptap/vue-3": "^2.0.0-beta.83",
     "autoprefixer": "^9",
     "core-js": "^3.6.5",
     "postcss": "^7",
