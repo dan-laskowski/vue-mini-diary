@@ -10,6 +10,7 @@
   "dependencies": {
     "@fortawesome/vue-fontawesome": "^2.0.6",
     "@heroicons/vue": "^1.0.5",
+    "@popperjs/core": "^2.11.0",
     "@supabase/supabase-js": "^1.28.5",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "autoprefixer": "^9",
@@ -17,6 +18,7 @@
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "uid": "^2.0.0",
+    "v-calendar": "^3.0.0-alpha.6",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },
