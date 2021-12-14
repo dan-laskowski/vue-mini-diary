@@ -8,11 +8,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/vue-fontawesome": "^2.0.6",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@heroicons/vue": "^1.0.5",
     "@popperjs/core": "^2.11.0",
     "@supabase/supabase-js": "^1.28.5",
     "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@tiptap/extension-bullet-list": "^2.0.0-beta.25",
+    "@tiptap/extension-list-item": "^2.0.0-beta.20",
+    "@tiptap/extension-ordered-list": "^2.0.0-beta.26",
+    "@tiptap/extension-underline": "^2.0.0-beta.22",
     "@tiptap/starter-kit": "^2.0.0-beta.157",
     "@tiptap/vue-3": "^2.0.0-beta.83",
     "autoprefixer": "^9",

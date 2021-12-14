@@ -1,8 +1,12 @@
 <template>
-  <div class="grid grid-cols-2">
-    <DatePicker v-model="date" />
-    <Tiptap />
-    <h2>{{ date.getDate() }}</h2>
+  <div
+    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans"
+  >
+    <div class="grid grid-cols-2 gap-14">
+      <DatePicker class="border-none" v-model="date" />
+      <Tiptap />
+      <!--<h2>{{ date.getDate() }}</h2> -->
+    </div>
   </div>
 </template>
 
