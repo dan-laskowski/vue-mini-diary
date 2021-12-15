@@ -9,10 +9,11 @@ import {
   faItalic,
   faList,
   faListOl,
+  faParagraph,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faUnderline, faBold, faItalic, faList, faListOl);
+library.add(faUnderline, faBold, faItalic, faList, faListOl, faParagraph);
 
 createApp(App)
   .use(router)

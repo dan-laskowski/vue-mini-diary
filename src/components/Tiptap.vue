@@ -1,7 +1,25 @@
 <template>
   <div>
     <div v-if="editor">
-      <div class="flex space-x-4 text-gray-400">
+      <div class="flex space-x-4 text-gray-400 mb-2 bg-gray-100 rounded-md p-2">
+        <button
+          @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+          :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
+        >
+          H1
+        </button>
+        <button
+          @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+          :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
+        >
+          H2
+        </button>
+        <button
+          @click="editor.chain().focus().setParagraph().run()"
+          :class="{ 'is-active': editor.isActive('paragraph') }"
+        >
+          <font-awesome-icon icon="paragraph" />
+        </button>
         <button
           @click="editor.chain().focus().toggleBold().run()"
           :class="{ 'is-active': editor.isActive('bold') }"
@@ -39,43 +57,38 @@
 </template>
 
 <script>
-import { useEditor, EditorContent } from '@tiptap/vue-3';
+import { Editor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import BulletList from '@tiptap/extension-bullet-list';
-import OrderedList from '@tiptap/extension-ordered-list';
-import ListItem from '@tiptap/extension-list-item';
-import { ref } from 'vue';
+// import { ref } from 'vue';
 
 export default {
   components: {
     EditorContent,
   },
 
-  setup() {
-    const content = ref('<p>Write something about your day.</p>');
-    const editor = useEditor({
-      content: content.value,
-      extensions: [
-        StarterKit.configure({
-          history: false,
-          heading: {
-            levels: [1, 2],
-          },
-        }),
-        Underline,
-        BulletList,
-        OrderedList,
-        ListItem,
-      ],
+  data() {
+    return {
+      editor: null,
+    };
+  },
+  mounted() {
+    this.editor = new Editor({
+      extensions: [StarterKit, Underline],
+      content: `<p>Write something about your day</p>`,
     });
-
-    return { editor };
+  },
+  beforeUnmount() {
+    this.editor.distroy();
   },
 };
 </script>
 
-<style>
+<style lang="css" scoped>
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
 .is-active {
   color: #000;
 }
