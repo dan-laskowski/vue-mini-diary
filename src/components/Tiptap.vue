@@ -67,15 +67,33 @@ export default {
     EditorContent,
   },
 
+  props: {
+    modelValue: {
+      type: String,
+      defaut: '',
+    },
+  },
+
   data() {
     return {
       editor: null,
     };
   },
+  watch: {
+    modelValue(value) {
+      const isSame = this.editor.getHTML() === value;
+      if (isSame) return;
+
+      this.editor.commands.setContent(value, false);
+    },
+  },
   mounted() {
     this.editor = new Editor({
       extensions: [StarterKit, Underline],
-      content: `<p>Write something about your day</p>`,
+      content: this.modelValue,
+      onUpdate: () => {
+        this.$emit('update:modelValue', this.editor.getHTML());
+      },
     });
   },
   beforeUnmount() {
