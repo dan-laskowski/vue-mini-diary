@@ -50,6 +50,9 @@
         >
           <font-awesome-icon icon="list-ol" />
         </button>
+        <button>
+          <font-awesome-icon icon="save" />
+        </button>
       </div>
     </div>
     <editor-content :editor="editor" />
@@ -102,9 +105,14 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .ProseMirror > * + * {
   margin-top: 0.75em;
+}
+
+.ProseMirror {
+  min-height: 230px;
+  width: 100%;
 }
 
 .is-active {
