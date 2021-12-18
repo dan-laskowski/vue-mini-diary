@@ -82,6 +82,11 @@ export default {
       editor: null,
     };
   },
+  methods: {
+    saveContent() {
+      this.$emit('save-content');
+    },
+  },
   watch: {
     modelValue(value) {
       const isSame = this.editor.getHTML() === value;

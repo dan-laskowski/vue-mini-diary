@@ -7,13 +7,7 @@
         <DatePicker class="border-none mb-4" v-model="date" />
       </div>
       <div class="flex flex-col justify-between">
-        <Tiptap v-model="content" />
-        <!-- <button
-          type="button"
-          class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          Save a note
-        </button> -->
+        <Tiptap v-model="content" @save-content="saveContent" />
       </div>
       <h2>{{ date.getDate() }}</h2>
     </div>
@@ -31,7 +25,10 @@ export default {
   setup() {
     const date = ref(new Date());
     const content = ref('');
-    return { date, content };
+
+    const saveContent = async () => {};
+
+    return { date, content, saveContent };
   },
 };
 </script>
