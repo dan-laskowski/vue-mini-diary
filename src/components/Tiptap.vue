@@ -50,7 +50,7 @@
         >
           <font-awesome-icon icon="list-ol" />
         </button>
-        <button>
+        <button @click="saveContent()">
           <font-awesome-icon icon="save" />
         </button>
       </div>
@@ -118,6 +118,11 @@ export default {
 .ProseMirror {
   min-height: 230px;
   width: 100%;
+}
+
+.ProseMirror-focused {
+  outline-color: gray;
+  outline-width: 1px;
 }
 
 .is-active {
