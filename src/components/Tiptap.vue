@@ -105,7 +105,7 @@ export default {
     });
   },
   beforeUnmount() {
-    this.editor.distroy();
+    this.editor.destroy();
   },
 };
 </script>
