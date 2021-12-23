@@ -4,7 +4,13 @@
   >
     <div class="grid sm:grid-cols-2 sm:gap-14 grid-cols-1 gap-4">
       <div>
-        <DatePicker @click="getNote" class="font-sans mb-4" v-model="date" />
+        <DatePicker
+          :max-date="new Date()"
+          @click="getNote"
+          class="font-sans mb-4"
+          v-model="date"
+          :attributes="attributes"
+        />
       </div>
       <div
         class="flex flex-col justify-between border-gray-100 rounded-md border-2 max-w-xs"
@@ -28,9 +34,17 @@ import moment from 'moment';
 export default {
   name: 'Diary',
   components: { DatePicker, Tiptap },
+
   setup() {
     const date = ref(new Date());
     const content = ref('');
+    const dates = ref([]);
+    const attributes = ref([
+      {
+        dot: 'red',
+        dates: dates,
+      },
+    ]);
     const user_id = store.state.user.id;
     console.log(moment().format());
 
@@ -107,8 +121,24 @@ export default {
         console.log(error);
       }
     };
+
+    const getDots = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('notes')
+          .select('inserted_at')
+          .eq('user_id', user_id);
+        if (error) throw error;
+        let array = [];
+        data.map((item) => array.push(item.inserted_at));
+        dates.value = array;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getDots();
     getNote();
-    return { date, content, setNote, getNote };
+    return { date, attributes, content, setNote, getNote, getDots };
   },
 };
 </script>
