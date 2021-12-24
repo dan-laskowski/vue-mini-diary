@@ -10,6 +10,7 @@
           class="font-sans mb-4"
           v-model="date"
           :attributes="attributes"
+          is-expanded
         />
       </div>
       <div
