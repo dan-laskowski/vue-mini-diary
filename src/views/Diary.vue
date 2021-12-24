@@ -72,6 +72,7 @@ export default {
               { returning: 'minimal' }
             );
             if (error) throw error;
+            getDots();
             console.log('note added');
           } catch (error) {
             console.log(error);
