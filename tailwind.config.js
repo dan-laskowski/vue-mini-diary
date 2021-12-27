@@ -9,10 +9,14 @@ module.exports = {
         orangish: '#F19D0B',
         greyish: '#2E4B62',
         whitish: '#FAEFE0',
+        violet: '#a186ed',
+        purple: '#783F8E',
+        offwhite: '#ffeddf',
       },
     },
     fontFamily: {
       Taviraj: ['Taviraj, serif'],
+      Dancing: ['Dancing Script', 'cursive'],
       sans: ['Helvetica', 'Arial', 'sans-serif'],
     },
     container: {
