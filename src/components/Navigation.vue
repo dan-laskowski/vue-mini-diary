@@ -58,19 +58,21 @@
             class="text-offwhite font-Dancing no-underline hover:no-underline text-3xl lg:text-5xl"
             :to="{ name: 'Home' }"
           >
-            <h2 class="font-Dancing text-offwhite text-5xl">Dairy</h2>
+            <h2 class="font-Dancing text-offwhite text-5xl">Diary</h2>
           </router-link>
         </div>
         <div
           class="flex font-Dancing text-2xl items-center space-x-1 text-offwhite"
         >
-          <router-link class="py-5 px-3" :to="{ name: 'Register' }"
+          <router-link
+            class="py-5 px-3 hover:text-indigo-200"
+            :to="{ name: 'Register' }"
             >Signup</router-link
           >
           <router-link
-            class="py-5 px-3 hover:animate-spin"
+            class="py-5 px-3 hover:text-indigo-200"
             :to="{ name: 'Login' }"
-            >Login</router-link
+            ><p>Login</p></router-link
           >
         </div>
       </div>
