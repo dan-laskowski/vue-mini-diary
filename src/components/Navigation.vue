@@ -1,11 +1,11 @@
 <template>
-  <nav id="header" class="w-full z-30 top-0 text-white">
+  <!-- <nav id="header" class="w-full z-30 top-0">
     <div
-      class="w-full container mx-auto flex flex-wrap font-taviraj items-center justify-between mt-0 py-2 mb-12"
+      class="w-full container mx-auto flex flex-wrap font-Taviraj items-center justify-between mt-0 py-2 mb-12"
     >
       <div class="pl-4 flex items-center">
         <router-link
-          class="toggleColour text-greyish no-underline hover:no-underline text-2xl lg:text-4xl"
+          class="toggleColour text-offwhite font-Dancing no-underline hover:no-underline text-3xl lg:text-5xl"
           :to="{ name: 'Home' }"
         >
           Diary
@@ -48,15 +48,38 @@
         </router-link>
       </div>
     </div>
-    <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+  </nav> -->
+
+  <nav>
+    <div class="max-w-6xl mx-auto">
+      <div class="flex justify-between items-center">
+        <div>
+          <router-link
+            class="text-offwhite font-Dancing no-underline hover:no-underline text-3xl lg:text-5xl"
+            :to="{ name: 'Home' }"
+          >
+            <h2 class="font-Dancing text-offwhite text-5xl">Dairy</h2>
+          </router-link>
+        </div>
+        <div
+          class="flex font-Dancing text-2xl items-center space-x-1 text-offwhite"
+        >
+          <router-link class="py-5 px-3" :to="{ name: 'Register' }"
+            >Signup</router-link
+          >
+          <router-link
+            class="py-5 px-3 hover:animate-spin"
+            :to="{ name: 'Login' }"
+            >Login</router-link
+          >
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
   name: 'Navigation',
-  props: {
-    msg: String,
-  },
 };
 </script>
