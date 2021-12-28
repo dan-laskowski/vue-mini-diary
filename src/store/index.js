@@ -1,7 +1,7 @@
 import { reactive } from '@vue/reactivity';
 
 const state = reactive({
-  user: {},
+  user: null,
 });
 
 const methods = {

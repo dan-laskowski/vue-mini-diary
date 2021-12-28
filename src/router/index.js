@@ -22,6 +22,7 @@ const routes = [
     component: Register,
     meta: {
       auth: false,
+      hideForAuth: true,
     },
   },
   {
@@ -30,6 +31,7 @@ const routes = [
     component: Login,
     meta: {
       auth: false,
+      hideForAuth: true,
     },
   },
   {
@@ -38,6 +40,7 @@ const routes = [
     component: PasswordReset,
     meta: {
       auth: false,
+      hideForAuth: true,
     },
   },
   {
@@ -64,13 +67,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const user = supabase.auth.user();
+  const user = !!supabase.auth.user();
+  console.log(user);
   if (to.matched.some((res) => res.meta.auth)) {
     if (user) {
       next();
       return;
     }
     next({ name: 'Login' });
+    return;
+  } else if (to.matched.some((res) => res.meta.hideForAuth)) {
+    if (user) {
+      next({ name: 'Home' });
+      return;
+    }
+    next();
     return;
   }
   next();
