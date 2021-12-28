@@ -14,7 +14,7 @@
         />
       </div>
       <div
-        class="flex flex-col justify-between border-gray-100 rounded-md border-2 max-w-xs"
+        class="flex flex-col justify-between border-gray-100 bg-gray-100 rounded-md border-2 max-w-xs"
       >
         <Tiptap v-model="content" @save-content="setNote" />
       </div>

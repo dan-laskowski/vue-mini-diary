@@ -65,15 +65,24 @@
           class="flex font-Dancing text-2xl items-center space-x-1 text-offwhite"
         >
           <router-link
+            v-if="!user"
             class="py-5 px-3 hover:text-indigo-200"
             :to="{ name: 'Register' }"
             >Signup</router-link
           >
           <router-link
+            v-if="!user"
             class="py-5 px-3 hover:text-indigo-200"
             :to="{ name: 'Login' }"
             ><p>Login</p></router-link
           >
+          <p
+            v-if="user"
+            class="py-5 px-3 hover:text-indigo-200 cursor-pointer"
+            @click="logout"
+          >
+            Logout
+          </p>
         </div>
       </div>
     </div>
@@ -81,7 +90,24 @@
 </template>
 
 <script>
+import store from '../store/index';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { supabase } from '../supabase/index';
 export default {
   name: 'Navigation',
+  setup() {
+    const user = computed(() => store.state.user);
+
+    const router = useRouter();
+
+    const logout = () => {
+      supabase.auth.signOut();
+      // console.log(user);
+      router.push({ name: 'Home' });
+    };
+
+    return { logout, user };
+  },
 };
 </script>
