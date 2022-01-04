@@ -50,8 +50,11 @@
         >
           <font-awesome-icon icon="list-ol" />
         </button>
-        <button @click="saveContent()">
+        <button v-if="!isLoading" @click="saveContent()">
           <font-awesome-icon icon="save" />
+        </button>
+        <button v-else disabled class="text-fuchsia-900 animate-spin">
+          <font-awesome-icon icon="spinner" />
         </button>
       </div>
     </div>
@@ -63,7 +66,6 @@
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-// import { ref } from 'vue';
 
 export default {
   components: {
@@ -74,6 +76,10 @@ export default {
     modelValue: {
       type: String,
       defaut: '',
+    },
+    isLoading: {
+      type: Boolean,
+      defaut: false,
     },
   },
 

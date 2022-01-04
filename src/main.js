@@ -11,6 +11,7 @@ import {
   faListOl,
   faParagraph,
   faSave,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -21,7 +22,8 @@ library.add(
   faList,
   faListOl,
   faParagraph,
-  faSave
+  faSave,
+  faSpinner
 );
 
 createApp(App)

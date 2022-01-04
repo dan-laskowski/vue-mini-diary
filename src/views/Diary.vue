@@ -16,7 +16,11 @@
       <div
         class="flex flex-col justify-between border-gray-100 bg-gray-100 rounded-md border-2 max-w-xs shadow-md"
       >
-        <Tiptap v-model="content" @save-content="setNote" />
+        <Tiptap
+          v-model="content"
+          @save-content="setNote"
+          :isLoading="isLoading"
+        />
       </div>
     </div>
   </div>
@@ -34,6 +38,7 @@ export default {
   components: { DatePicker, Tiptap },
 
   setup() {
+    const isLoading = ref(false);
     const date = ref(new Date());
     const content = ref('');
     const dates = ref([]);
@@ -46,6 +51,7 @@ export default {
     const user_id = store.state.user.id;
     const setNote = async () => {
       try {
+        isLoading.value = true;
         const { data: note, error } = await supabase
           .from('notes')
           .select('note')
@@ -94,6 +100,7 @@ export default {
             console.log(error);
           }
         }
+        isLoading.value = false;
       } catch (error) {
         console.log(error.message);
       }
@@ -141,7 +148,7 @@ export default {
     };
     getNote();
     getDots();
-    return { date, attributes, content, setNote, getNote, getDots };
+    return { date, isLoading, attributes, content, setNote, getNote, getDots };
   },
 };
 </script>
