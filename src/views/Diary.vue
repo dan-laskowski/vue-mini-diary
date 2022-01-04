@@ -7,20 +7,17 @@
         <DatePicker
           :max-date="new Date()"
           @click="getNote"
-          class="font-sans mb-4"
+          class="font-sans mb-4 shadow-md"
           v-model="date"
           :attributes="attributes"
           is-expanded
         />
       </div>
       <div
-        class="flex flex-col justify-between border-gray-100 bg-gray-100 rounded-md border-2 max-w-xs"
+        class="flex flex-col justify-between border-gray-100 bg-gray-100 rounded-md border-2 max-w-xs shadow-md"
       >
         <Tiptap v-model="content" @save-content="setNote" />
       </div>
-      <h2>
-        {{ `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}` }}
-      </h2>
     </div>
   </div>
 </template>
@@ -47,8 +44,6 @@ export default {
       },
     ]);
     const user_id = store.state.user.id;
-    console.log(moment().format());
-
     const setNote = async () => {
       try {
         const { data: note, error } = await supabase
@@ -68,7 +63,7 @@ export default {
               {
                 user_id,
                 note: content.value,
-                inserted_at: moment().format('L'),
+                inserted_at: moment().format('l'),
               },
               { returning: 'minimal' }
             );
@@ -117,6 +112,11 @@ export default {
             }/${date.value.getDate()}/${date.value.getFullYear()}`
           );
         if (error) throw error;
+        console.log(
+          `${
+            date.value.getMonth() + 1
+          }/${date.value.getDate()}/${date.value.getFullYear()}`
+        );
         console.log('note got');
         content.value = note.length ? note[0].note : '';
       } catch (error) {
@@ -134,12 +134,13 @@ export default {
         let array = [];
         data.map((item) => array.push(item.inserted_at));
         dates.value = array;
+        console.log('dots get');
       } catch (error) {
         console.log(error.message);
       }
     };
-    getDots();
     getNote();
+    getDots();
     return { date, attributes, content, setNote, getNote, getDots };
   },
 };
