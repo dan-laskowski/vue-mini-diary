@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-if="editor">
-      <div class="flex space-x-4 text-gray-400 mb-2 bg-gray-100 rounded-md p-2">
+      <div
+        class="flex space-x-4 justify-center items-center text-gray-400 mb-2 bg-gray-200 rounded-md p-2"
+      >
         <button
           @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
           :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
