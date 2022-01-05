@@ -14,6 +14,7 @@ const routes = [
     component: Home,
     meta: {
       auth: false,
+      hideForAuth: true,
     },
   },
   {
@@ -78,7 +79,7 @@ router.beforeEach((to, from, next) => {
     return;
   } else if (to.matched.some((res) => res.meta.hideForAuth)) {
     if (user) {
-      next({ name: 'Home' });
+      next({ name: 'Diary' });
       return;
     }
     next();
