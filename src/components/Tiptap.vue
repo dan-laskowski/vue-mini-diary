@@ -58,7 +58,7 @@
         </button>
       </div>
     </div>
-    <editor-content :editor="editor" />
+    <editor-content :editor="editor" class="text-greyish text-sm" />
   </div>
 </template>
 
@@ -123,12 +123,39 @@ export default {
 
 .ProseMirror {
   min-height: 230px;
+  padding: 8px;
   width: 100%;
 }
 
 .ProseMirror-focused {
-  outline-color: gray;
-  outline-width: 1px;
+  outline: none;
+}
+
+.ProseMirror h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.ProseMirror h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.ProseMirror p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.ProseMirror ul li {
+  list-style-type: disc;
+}
+
+.ProseMirror ol li {
+  list-style-type: decimal;
+}
+
+.ProseMirror li {
+  margin-left: 12px;
 }
 
 .is-active {
