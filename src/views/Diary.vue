@@ -3,15 +3,20 @@
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans"
   >
     <div class="flex flex-col grow justify-items-center items-center max-w-2xl">
-      <div class="max-w-xs">
-        <DatePicker
-          :max-date="new Date()"
-          @click="getNote"
-          class="font-sans mb-8 shadow-md"
-          v-model="date"
-          :attributes="attributes"
-          is-expanded
-        />
+      <div class="flex flex-row">
+        <div class="max-w-xs">
+          <DatePicker
+            :max-date="new Date()"
+            @click="getNote"
+            class="font-sans mb-8 shadow-md"
+            v-model="date"
+            :attributes="attributes"
+            is-expanded
+          />
+        </div>
+        <h2 class="self-center text-center font-Dancing text-offwhite text-6xl">
+          Hello {{ username }}, how was your day?
+        </h2>
       </div>
       <div
         class="flex flex-col justify-between border-gray-100 bg-gray-100 rounded-md border-2 shadow-md"
@@ -49,6 +54,7 @@ export default {
       },
     ]);
     const user_id = store.state.user.id;
+    const username = store.state.user.user_metadata.name;
     const setNote = async () => {
       try {
         isLoading.value = true;
@@ -148,7 +154,16 @@ export default {
     };
     getNote();
     getDots();
-    return { date, isLoading, attributes, content, setNote, getNote, getDots };
+    return {
+      date,
+      username,
+      isLoading,
+      attributes,
+      content,
+      setNote,
+      getNote,
+      getDots,
+    };
   },
 };
 </script>
