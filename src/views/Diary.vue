@@ -44,7 +44,7 @@ export default {
     const dates = ref([]);
     const attributes = ref([
       {
-        dot: 'red',
+        dot: 'purple',
         dates: dates,
       },
     ]);
