@@ -18,6 +18,7 @@
     "@tiptap/extension-bullet-list": "^2.0.0-beta.25",
     "@tiptap/extension-list-item": "^2.0.0-beta.20",
     "@tiptap/extension-ordered-list": "^2.0.0-beta.26",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.46",
     "@tiptap/extension-underline": "^2.0.0-beta.22",
     "@tiptap/starter-kit": "^2.0.0-beta.157",
     "@tiptap/vue-3": "^2.0.0-beta.83",
@@ -42,6 +43,8 @@
     "dotenv": "^10.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "vue-cli-plugin-tailwind": "~2.2.17"
+    "vue-cli-plugin-tailwind": "~2.2.17",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.14"
   }
 }

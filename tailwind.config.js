@@ -15,7 +15,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      Taviraj: ['Taviraj, serif'],
+      Maven: ['Maven Pro', 'sans-serif'],
       Dancing: ['Dancing Script', 'cursive'],
       sans: ['Helvetica', 'Arial', 'sans-serif'],
     },

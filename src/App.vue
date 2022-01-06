@@ -1,5 +1,5 @@
 <template>
-  <div v-if="appReady" class="min-h-screen font-Taviraj box-border bg-violet">
+  <div v-if="appReady" class="min-h-screen font-Maven box-border bg-violet">
     <Navigation />
     <router-view />
   </div>
@@ -34,4 +34,5 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Taviraj:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 </style>
