@@ -60,7 +60,7 @@
         </button>
       </div>
     </div>
-    <editor-content :editor="editor" class="text-greyish text-sm" />
+    <editor-content :editor="editor" class="text-greyish font-Maven text-sm" />
   </div>
 </template>
 
@@ -68,6 +68,7 @@
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
+import Placeholder from '@tiptap/extension-placeholder';
 
 export default {
   components: {
@@ -105,7 +106,14 @@ export default {
   },
   mounted() {
     this.editor = new Editor({
-      extensions: [StarterKit, Underline],
+      extensions: [
+        StarterKit,
+        Underline,
+        Placeholder.configure({
+          placeholder: 'Write something about your day...',
+        }),
+      ],
+      autofocus: true,
       content: this.modelValue,
       onUpdate: () => {
         this.$emit('update:modelValue', this.editor.getHTML());
@@ -158,6 +166,14 @@ export default {
 
 .ProseMirror li {
   margin-left: 12px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
 }
 
 .is-active {
