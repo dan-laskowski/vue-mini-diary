@@ -2,13 +2,13 @@
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans"
   >
-    <div class="flex flex-col grow justify-items-center items-center max-w-2xl">
-      <div class="flex flex-row justify-between">
-        <div class="max-w-xs">
+    <div class="flex flex-col w-full grow items-center max-w-2xl">
+      <div class="flex flex-row w-full justify-between">
+        <div>
           <DatePicker
             :max-date="new Date()"
             @click="getNote"
-            class="font-Maven mb-8 shadow-md"
+            class="font-Maven mb-8 shadow-md max-w-xs"
             v-model="date"
             :attributes="attributes"
             is-expanded

@@ -52,12 +52,14 @@
         >
           <font-awesome-icon icon="list-ol" />
         </button>
-        <button v-if="!isLoading" @click="saveContent()">
-          <font-awesome-icon icon="save" />
-        </button>
-        <button v-else disabled class="text-fuchsia-900 animate-spin">
-          <font-awesome-icon icon="spinner" />
-        </button>
+        <div v-if="isEditable">
+          <button v-if="!isLoading" @click="saveContent()">
+            <font-awesome-icon icon="save" />
+          </button>
+          <button v-else disabled class="text-fuchsia-900 animate-spin">
+            <font-awesome-icon icon="spinner" />
+          </button>
+        </div>
       </div>
     </div>
     <editor-content :editor="editor" class="text-greyish font-Maven text-sm" />
