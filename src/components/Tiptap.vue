@@ -84,6 +84,10 @@ export default {
       type: Boolean,
       defaut: false,
     },
+    isEditable: {
+      type: Boolean,
+      defaut: true,
+    },
   },
 
   data() {
@@ -103,6 +107,9 @@ export default {
 
       this.editor.commands.setContent(value, false);
     },
+  },
+  updated() {
+    this.editor.setOptions({ editable: this.isEditable });
   },
   mounted() {
     this.editor = new Editor({

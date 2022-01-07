@@ -27,6 +27,7 @@
           v-model="content"
           @save-content="setNote"
           :isLoading="isLoading"
+          :isEditable="isEditable"
         />
       </div>
     </div>
@@ -46,7 +47,10 @@ export default {
 
   setup() {
     const isLoading = ref(false);
+    const isEditable = ref('');
     const date = ref(new Date());
+    const currentDate = moment().format('l');
+
     const content = ref('');
     const dates = ref([]);
     const attributes = ref([
@@ -127,11 +131,12 @@ export default {
             }/${date.value.getDate()}/${date.value.getFullYear()}`
           );
         if (error) throw error;
-        console.log(
+        isEditable.value =
+          currentDate ==
           `${
             date.value.getMonth() + 1
-          }/${date.value.getDate()}/${date.value.getFullYear()}`
-        );
+          }/${date.value.getDate()}/${date.value.getFullYear()}`;
+
         console.log('note got');
         content.value = note.length ? note[0].note : '';
       } catch (error) {
@@ -160,6 +165,7 @@ export default {
       date,
       username,
       isLoading,
+      isEditable,
       attributes,
       content,
       setNote,
