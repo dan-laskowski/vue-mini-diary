@@ -15,19 +15,19 @@
         >
           <router-link
             v-if="!user"
-            class="py-5 px-3 hover:text-indigo-200"
+            class="transition py-5 px-3 hover:text-indigo-200"
             :to="{ name: 'Register' }"
             >Signup</router-link
           >
           <router-link
             v-if="!user"
-            class="py-5 px-3 hover:text-indigo-200"
+            class="transition py-5 px-3 hover:text-indigo-200"
             :to="{ name: 'Login' }"
             ><p>Login</p></router-link
           >
           <p
             v-if="user"
-            class="py-5 px-3 hover:text-indigo-200 cursor-pointer"
+            class="transition py-5 px-3 hover:text-indigo-200 cursor-pointer"
             @click="logout"
           >
             Logout
