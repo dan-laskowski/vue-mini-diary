@@ -13,10 +13,13 @@
           Sign up to your account
         </h2>
       </div>
-      <p v-if="{ statusMessage }" class="text-green-600">{{ statusMessage }}</p>
-      <p v-if="{ errorMessage }" class="text-red-500">{{ errorMessage }}</p>
+      <p v-if="{ statusMsg }" class="text-green-600">{{ statusMsg }}</p>
+      <p v-if="{ errorMsg }" class="text-red-500">{{ errorMsg }}</p>
 
-      <form class="mt-8 space-y-6" @submit.prevent="loginUser">
+      <form
+        class="mt-8 space-y-6"
+        @submit.prevent="handleLogin(email, password, isMagicForm)"
+      >
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
@@ -27,7 +30,7 @@
               type="email"
               autocomplete="email"
               required=""
-              :class="[linkForm ? 'rounded-md' : 'rounded-t-md']"
+              :class="[isMagicForm ? 'rounded-md' : 'rounded-t-md']"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
               v-model="email"
@@ -36,12 +39,12 @@
           <div>
             <label for="password" class="sr-only">Password</label>
             <input
-              v-if="!linkForm"
+              v-if="!isMagicForm"
               id="password"
               name="password"
               type="password"
               autocomplete="current-password"
-              required="linkForm"
+              required="isMagicForm"
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Password"
               v-model="password"
@@ -50,7 +53,7 @@
         </div>
         <div>
           <router-link
-            v-if="!linkForm"
+            v-if="!isMagicForm"
             class="text-sm underline mt-4 text-center"
             :to="{ name: 'PasswordReset' }"
           >
@@ -63,7 +66,7 @@
             type="submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-bluish hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            {{ linkForm ? `Send me a magic link` : `Sign up` }}
+            {{ isMagicForm ? `Send me a magic link` : `Sign up` }}
           </button>
         </div>
       </form>
@@ -91,7 +94,7 @@
       >
         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
           <svg
-            v-if="!linkForm"
+            v-if="!isMagicForm"
             xmlns="http://www.w3.org/2000/svg"
             class="h-4 w-4"
             fill="none"
@@ -121,7 +124,7 @@
             />
           </svg>
         </span>
-        {{ linkForm ? 'Login with a password' : 'Login with a magic link' }}
+        {{ isMagicForm ? 'Login with a password' : 'Login with a magic link' }}
       </button>
     </div>
   </div>
@@ -129,54 +132,30 @@
 
 <script>
 import { ref } from 'vue';
-import { supabase } from '../supabase/index';
-import { useRouter } from 'vue-router';
+import {
+  handleLogin,
+  statusMessage as statusMsg,
+  errorMessage as errorMsg,
+} from '../vuetils/useAuth';
 export default {
   name: 'Login',
   setup() {
-    const router = useRouter();
-    const formValues = {
-      email: ref(null),
-      password: ref(null),
-    };
-    const statusMessage = ref(null);
-    const errorMessage = ref(null);
-    const linkForm = ref(false);
-
-    //Extracting multiple properties by object deconstruction
-    const { email, password } = formValues;
-
-    //Login user
-    const loginUser = async () => {
-      try {
-        const { error } = await supabase.auth.signIn({
-          email: email.value,
-          password: password.value,
-        });
-        if (error) throw error;
-        !linkForm.value
-          ? router.push({ name: 'Diary' })
-          : (statusMessage.value = `Magic link send! Check out your inbox`);
-      } catch (error) {
-        errorMessage.value = `Error: ${error.message}`;
-        setTimeout(() => {
-          errorMessage.value = null;
-        }, 5000);
-      }
-    };
+    const email = ref(null);
+    const password = ref(null);
+    const isMagicForm = ref(false);
 
     const switchForms = () => {
-      linkForm.value = !linkForm.value;
+      isMagicForm.value = !isMagicForm.value;
       password.value = null;
     };
 
     return {
       email,
       password,
-      errorMessage,
-      statusMessage,
-      loginUser,
-      linkForm,
+      errorMsg,
+      statusMsg,
+      handleLogin,
+      isMagicForm,
       switchForms,
     };
   },
