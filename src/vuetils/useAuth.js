@@ -6,7 +6,6 @@ const authRouter = useRouter();
 const errorMessage = ref(null);
 const statusMessage = ref(null);
 
-// eslint-disable-next-line no-unused-vars
 const clearMessage = (msg) => {
   setTimeout(() => {
     msg.value = null;
