@@ -56,7 +56,6 @@ const handleSignup = async (name, email, password, confirmPassword) => {
           },
         }
       );
-
       if (error) throw error;
       router.push({ name: 'Login' });
     } else {
@@ -71,7 +70,7 @@ const handleSignup = async (name, email, password, confirmPassword) => {
 
 const handlePasswordReset = async (email) => {
   try {
-    const { error } = await supabase.auth.api.resetPasswordForEmail({ email });
+    const { error } = await supabase.auth.api.resetPasswordForEmail(email);
     if (error) throw error;
     statusMessage.value = 'We send you password reset link. Check your inbox.';
     clearMessage(statusMessage);

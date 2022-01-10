@@ -19,7 +19,7 @@
       <p v-if="statusMessage" class="text-green-600">{{ statusMessage }}</p>
       <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
 
-      <form class="mt-8 space-y-6" @submit.prevent="resetPassword">
+      <form class="mt-8 space-y-6" @submit.prevent="handlePasswordReset(email)">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div class="mb-4">
@@ -48,36 +48,18 @@
 </template>
 
 <script>
-import { supabase } from '../supabase/index';
+import {
+  statusMessage,
+  errorMessage,
+  handlePasswordReset,
+} from '../vuetils/useAuth';
 import { ref } from 'vue';
 export default {
   name: 'PasswordReset',
   setup() {
     const email = ref(null);
-    const statusMessage = ref(null);
-    const errorMessage = ref(null);
 
-    const resetPassword = async () => {
-      try {
-        const { error } = await supabase.auth.api.resetPasswordForEmail(
-          email.value
-        );
-        console.log(error);
-        if (error) throw error;
-        statusMessage.value =
-          'We send you password reset link. Check your inbox.';
-        setTimeout(() => {
-          statusMessage.value = null;
-        }, 5000);
-      } catch (error) {
-        errorMessage.value = `Error: ${error.message}`;
-        setTimeout(() => {
-          errorMessage.value = null;
-        }, 5000);
-      }
-    };
-
-    return { email, errorMessage, statusMessage, resetPassword };
+    return { email, errorMessage, statusMessage, handlePasswordReset };
   },
 };
 </script>
