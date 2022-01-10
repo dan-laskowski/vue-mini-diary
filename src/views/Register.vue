@@ -13,7 +13,10 @@
           Create your diary account
         </h2>
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="registerUser">
+      <form
+        class="mt-8 space-y-6"
+        @submit.prevent="handleSignup(name, email, password, confirmPassword)"
+      >
         <p v-if="{ errorMessage }" class="text-red-500">{{ errorMessage }}</p>
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
@@ -93,7 +96,7 @@
                 aria-hidden="true"
               />
             </span>
-            Sign in
+            Sign up
           </button>
         </div>
       </form>
@@ -103,71 +106,23 @@
 
 <script>
 import { ref } from 'vue';
-import { supabase } from '../supabase/index';
-import { useRouter } from 'vue-router';
-
+import { errorMessage, handleSignup } from '../vuetils/useAuth';
 import { LockClosedIcon } from '@heroicons/vue/solid';
 export default {
   name: 'Register',
   setup() {
-    const router = useRouter();
-    const formValues = {
-      name: ref(null),
-      email: ref(null),
-      password: ref(null),
-      confirmPassword: ref(null),
-    };
-    const errorMessage = ref(null);
+    const name = ref(null);
+    const email = ref(null);
+    const password = ref(null);
+    const confirmPassword = ref(null);
 
-    //Extracting multiple properties by object deconstruction
-    const { name, email, password, confirmPassword } = formValues;
-
-    //Register user to app function
-    const registerUser = async () => {
-      if (password.value === confirmPassword.value) {
-        try {
-          //Register user in project's database
-          const { error } = await supabase.auth.signUp(
-            {
-              email: email.value,
-              password: password.value,
-            },
-            {
-              data: {
-                name: name.value,
-              },
-            }
-          );
-
-          if (error) throw error;
-
-          //Push user to Login page when credentials are correct
-          router.push({ name: 'Login' });
-        } catch (error) {
-          errorMessage.value = error.message;
-
-          //Reset error message after 5 seconds
-          setTimeout(() => {
-            errorMessage.value = null;
-          }, 5000);
-        }
-        return;
-      }
-      //Set error message when passwords in the form do not match
-      errorMessage.value = `Error: Passwords do not match`;
-
-      //Reset error message after 5 seconds
-      setTimeout(() => {
-        errorMessage.value = null;
-      }, 5000);
-    };
     return {
       name,
       email,
       password,
       confirmPassword,
       errorMessage,
-      registerUser,
+      handleSignup,
       LockClosedIcon,
     };
   },

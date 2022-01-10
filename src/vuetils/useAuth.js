@@ -1,8 +1,7 @@
 import { ref } from 'vue';
 import { supabase } from '../supabase/index';
-import { useRouter } from 'vue-router';
+import router from '../router';
 
-const authRouter = useRouter();
 const errorMessage = ref(null);
 const statusMessage = ref(null);
 
@@ -21,8 +20,8 @@ const handleLogin = async (email, password, isMagicForm) => {
       password: password,
     });
     if (error) throw error;
-    isMagicForm.value
-      ? (window.location.href = '/')
+    !isMagicForm.value
+      ? router.push({ name: 'Diary' })
       : (statusMessage.value = `Magic link send! Check out your inbox.`);
     clearMessage(statusMessage);
   } catch (error) {
@@ -35,7 +34,8 @@ const handleLogout = async () => {
   try {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
-    authRouter.push({ name: 'Home' });
+    console.log(router);
+    router.push({ name: 'Home' });
   } catch (error) {
     errorMessage.value = `Error: ${error.message}`;
     clearMessage(errorMessage.value);
@@ -58,10 +58,11 @@ const handleSignup = async (name, email, password, confirmPassword) => {
       );
 
       if (error) throw error;
-      // authRouter.push({ name: 'Login' });
-      window.location.href = '/';
+      router.push({ name: 'Login' });
+    } else {
+      errorMessage.value = `Error: Passwords do not match`;
+      clearMessage(errorMessage);
     }
-    errorMessage.value = `Error: Passwords do not match`;
   } catch (error) {
     errorMessage.value = error.message;
     clearMessage(errorMessage.value);
@@ -123,5 +124,4 @@ export {
   handleUserUpdate,
   statusMessage,
   errorMessage,
-  authRouter,
 };

@@ -28,7 +28,7 @@
           <p
             v-if="user"
             class="transition py-5 px-3 hover:text-indigo-200 cursor-pointer"
-            @click="logout"
+            @click="handleLogout"
           >
             Logout
           </p>
@@ -41,22 +41,23 @@
 <script>
 import store from '../store/index';
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { supabase } from '../supabase/index';
+import { handleLogout } from '../vuetils/useAuth';
+// import { useRouter } from 'vue-router';
+// import { supabase } from '../supabase/index';
 export default {
   name: 'Navigation',
   setup() {
     const user = computed(() => store.state.user);
 
-    const router = useRouter();
+    // const router = useRouter();
 
-    const logout = () => {
-      supabase.auth.signOut();
-      // console.log(user);
-      router.push({ name: 'Home' });
-    };
+    // const logout = () => {
+    //   supabase.auth.signOut();
+    //   // console.log(user);
+    //   router.push({ name: 'Home' });
+    // };
 
-    return { logout, user };
+    return { handleLogout, user };
   },
 };
 </script>
